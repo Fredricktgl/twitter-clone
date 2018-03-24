@@ -1,50 +1,63 @@
-<div class="container">
+<div class="reply-container">
   <div class="row form-replies">
-   <div class="reply-tweet-user-p">
-     <table width: "100vw">
-       <% @tweet_user.each do |u| %>
-         <tr>
-           <td class="reply-tweet-user-avatar"><%= image_tag u.user.img, class: "avatar-pic-for-like" %></td>
-           <td><strong><%= u.user.name %></strong></br>
-             @<%= u.user.handlename %></td>
-         </tr>
-         <tr>
-           <td colspan="2"><strong>Tweets: </strong><%= @tweet.tweet %><br>
-           <%= image_tag @tweet.image, width: '500px' %>
-           </td>
-         </tr>
+        <%= form_for @reply, url: user_tweet_replies_path(current_user, @tweet) do |f| %>
+    <table>
+      <% @tweet_user.each do |u| %>
+        <tr>
+          <td colspan="2" align="center">
+            <h2><p><strong>Reply to tweet</strong></p></h2>
+          </td>
+        </tr>
 
-         <% end %>
-             
-      </table>
-    </div>
-  </div>
-  
-  <div class="row form-replies">
-    <%= form_for @reply, url: user_tweet_replies_path(current_user, @tweet) do |f| %>
-      <div class="form-group">
-        <%= f.text_area :reply, placeholder: "Leave your reply here...", :cols => "100%", :rows => "2", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-      </div>
-    <% end %>
-  </div>
+        <tr>
+          <td class="tweet-pic-align">
+            <%= image_tag u.user.img, class: "avatar-pic-for-like" %>
+          </td>
 
-
-  <div class="row row-replies">
-    <% @tweet.replies.each do |reply| %>
-      <p class="reply-date text-muted"><%= reply.created_at.strftime("%a %e %b %Y") %>&nbsp<%= reply.created_at.strftime("%I:%M%p") %></p>
-      <p class="reply-text"><strong><%= reply.reply %></strong></p>
-      <% if current_user %>
-        <%= link_to "Delete", user_tweet_reply_path(current_user, @tweet, reply), method: :delete %>
+          <td class="tweet-details-align">
+            <strong><%= u.user.name %></strong> <span class="tweet-name">@<%= u.user.handlename %> · <%= u.created_at.strftime("%e %b") %> </span></br>
+            <%= u.tweet %></br>
+            <%= image_tag u.image, width: '300em' if u.image? %></br>
+          </td>
+        </tr>
       <% end %>
-      <br />
-    <% end%>
-  </div>
-<br />
-<br />
 
-<%= link_to 'Back to index', root_path %>
+        
+          <tr>
+            <td colspan="2">
+              <div class="form-group">  
+                <%= f.text_area :reply, placeholder: "Tweet your reply", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.submit "Reply", class: "btn btn-primary" %>
+                <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+
+        <% @tweet.replies.reverse_each do |reply| %>
+          <tr>
+            <td class="tweet-pic-align">
+              <%= image_tag reply.user.img, class: "avatar-pic-for-like" %>
+            </td>
+
+             <td class="tweet-details-align">
+              <strong><%= reply.user.name %></strong> <span class="tweet-name">@<%= reply.user.handlename %> · <%= reply.created_at.strftime("%e %b") %> </span></br>
+              <%= reply.reply %></br>
+              <%= image_tag reply.tweet.image, width: '300em' if reply.tweet.image? %></br>
+              
+              <% if reply.user.id == current_user.id %>
+                <%= link_to "Delete", user_tweet_reply_path(current_user, @tweet, reply), method: :delete %>
+              <% end %>
+              <br />
+            </td>
+
+          </tr>
+        <% end %>
+
+
+    </table>
+  </div>
+
 </div>

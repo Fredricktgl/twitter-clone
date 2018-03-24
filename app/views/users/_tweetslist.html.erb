@@ -16,12 +16,10 @@
           <%= tweet.tweet %></br>
           <%= image_tag tweet.image, width: '300em' if tweet.image? %></br>
           <p class="options">
-            <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-outline-primary btn-sm" %>
-            <%= link_to 'Show', tweet_path(tweet), class: "btn btn-outline-primary btn-sm" %>
+            <%= link_to 'Comment', tweet_path(tweet), id: "commentBtn", class: "btn btn-outline-primary btn-sm" %>
             <%= link_to 'Edit', edit_tweet_path(tweet), class: "btn btn-outline-primary btn-sm" %>
             <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: {confirm:"Are you sure?"}, remote: true, class: "btn btn-outline-primary btn-sm" %>
-        
-              
+                
           <% if tweet.likes.any? do |like| like.user == current_user end %>
             <%= link_to image_tag("filled.svg"), dislike_user_tweet_path(@user, tweet), method: :delete, remote: true %>
           <% else %>
@@ -35,3 +33,6 @@
     </div>
   </div>
 <% end %>
+
+
+
