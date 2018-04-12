@@ -8,5 +8,6 @@
 5) Ajax issue with likes/dislikes
 6) Logic error when editing tweets, it will create a new tweet instead of editing it.
 7) In the live app, pictures will get "deleted" after 1 hour, displaying only the image path. This mainly is due to how     heroku works.
+8) Mailer funtions (forget password and such.) was not setup for this app.
   
 View the live app here: https://alpha-camp-twitter.herokuapp.com/
