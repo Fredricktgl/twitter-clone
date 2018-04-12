@@ -2,9 +2,10 @@
 
 1) An attempt to do out my own version of Twitter. This app was done as training to more advanced ruby on rails concepts.
 2) Git clone https://github.com/Fredricktgl/twitter-clone.git to your directory
-3) Bundle install
-4) Rake db:create db:migrate
-5) Alternatively, you can view the live app here: https://alpha-camp-twitter.herokuapp.com/
+3) cd twitter-clone
+4) Bundle install
+5) Rake db:create db:migrate
+6) Alternatively, you can view the live app here: https://alpha-camp-twitter.herokuapp.com/
 
 # Known issues
 1) User interface not optimized for different screen resolutions
