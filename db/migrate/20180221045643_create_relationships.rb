@@ -8,7 +8,6 @@ class CreateRelationships < ActiveRecord::Migration[5.1]
 
     add_foreign_key :relationships, :users, column: :follower_id
     add_foreign_key :relationships, :users, column: :following_id
-    add_index :relationships, [:follower_id, :following_id], unique: true
-
+    add_index :relationships, %i[follower_id following_id], unique: true
   end
 end

@@ -16,7 +16,7 @@ class RepliesController < ApplicationController
       redirect_to tweet_path(@tweet)
     end
   end
-  
+
   private
 
   def reply_params

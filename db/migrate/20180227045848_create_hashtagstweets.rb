@@ -6,7 +6,6 @@ class CreateHashtagstweets < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_index :hashtagstweets, [:tweet_id, :hashtag_id], unique: true
-
+    add_index :hashtagstweets, %i[tweet_id hashtag_id], unique: true
   end
 end

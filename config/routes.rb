@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root "users#index"
+  root 'users#index'
 
   resources :users do
-
     resources :tweets do
       post :like, on: :member
       delete :dislike, on: :member
@@ -20,11 +19,10 @@ Rails.application.routes.draw do
     get :total_like, on: :collection
     get :hashtag, on: :collection
 
-    resources :tweets, only: [:index, :show] do
-      resources :replies, only: [:create, :destroy]
+    resources :tweets, only: %i[index show] do
+      resources :replies, only: %i[create destroy]
     end
   end
 
   resources :tweets
-
 end

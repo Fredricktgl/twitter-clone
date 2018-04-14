@@ -16,6 +16,5 @@ module TwitterClone
     # -- all .rb files in that directory are automatically loaded.
 
     config.time_zone = 'Singapore'
-
   end
 end
